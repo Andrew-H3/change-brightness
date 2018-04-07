@@ -40,7 +40,26 @@ int main(int argc, char *argv[]){
 	else {printf("file does not exist\n"); return 0;}
 
 
+	//check brightness
+int getBrightness(void){
+	int brightness = 0;
+	char line[5];
+	fp = fopen( brightfile, "r");
+	if (fp != NULL) {
+		fgets(line, 5, fp);
+		sscanf(line, "%d", &brightness);
+#ifdef debug
+		printf("brightness: %d\n", brightness);
+#endif
+		fclose(fp);
+		return brightness;
+	}
+	else {printf("error: could not find brightness\n"); return -1;}
+}
+
+
 	//check max brightness
+int getMaxBrightness(void){
 	int maxBrightness = 0;
 	char line[5];
 	fp = fopen( maxfile, "r");
@@ -51,22 +70,25 @@ int main(int argc, char *argv[]){
 		printf("max brightness: %d\n", maxBrightness);
 #endif
 		fclose(fp);
+		return maxBrightness;
 	}
-	else {printf("error: could not find max brightness\n"); return 0;}
+	else {printf("error: could not find max brightness\n"); return -1;}
+}
 
 
 	//set brightness
-	float brightness;
+int setBrightness(int val){
 	fp = fopen( brightfile, "w");
 	if (fp != NULL){
-		brightness = maxBrightness * newVal;
 #ifdef debug
-		printf("setting brightness to %d\n", (int)brightness);
+		printf("setting brightness to %d\n", val);
 #endif
-		fprintf(fp, "%d", (int)brightness);
+		fprintf(fp, "%d", val);
 		fclose(fp);
+		return val;
 	}
-	else {printf("error: could not access file\n"); return 0;}
+	else {printf("error: could not access file\n"); return -1;}
+}
 
 #ifdef debug
 	printf("made it to end\n");
