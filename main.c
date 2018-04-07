@@ -1,4 +1,6 @@
 //#define debug
+#define brightfile "/sys/class/backlight/intel_backlight/brightness"
+#define maxfile "/sys/class/backlight/intel_backlight/max_brightness"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,7 +31,7 @@ int main(int argc, char *argv[]){
 
 
 	//check if file exists
-	fp = fopen("/sys/class/backlight/intel_backlight/brightness", "r");
+	fp = fopen( brightfile, "r");
 	if (fp != NULL) {
 #ifdef debug
 		printf("brightness file exists\n");
@@ -41,7 +43,7 @@ int main(int argc, char *argv[]){
 	//check max brightness
 	int maxBrightness = 0;
 	char line[5];
-	fp = fopen("/sys/class/backlight/intel_backlight/max_brightness", "r");
+	fp = fopen( maxfile, "r");
 	if (fp != NULL) {
 		fgets(line, 5, fp);
 		sscanf(line, "%d", &maxBrightness);
@@ -55,7 +57,7 @@ int main(int argc, char *argv[]){
 
 	//set brightness
 	float brightness;
-	fp = fopen("/sys/class/backlight/intel_backlight/brightness", "w");
+	fp = fopen( brightfile, "w");
 	if (fp != NULL){
 		brightness = maxBrightness * newVal;
 #ifdef debug
