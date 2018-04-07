@@ -14,7 +14,7 @@ int main(int argc, char *argv[]){
 	if (argv[1] != NULL){
 		sscanf(argv[1], "%f", &argVal);
 		if (argVal > 100) {
-			printf("ERROR: cannot excede 100\%\n");
+			printf("ERROR: cannot excede 100 percent\n");
 			return 0;}
 #ifdef debug
 		printf("argument given: %f\n", argVal);
