@@ -1,4 +1,4 @@
-#define debug
+//#define debug
 #define brightfile "/sys/class/backlight/intel_backlight/brightness"
 #define maxfile "/sys/class/backlight/intel_backlight/max_brightness"
 #define VERSION "v1.0"
