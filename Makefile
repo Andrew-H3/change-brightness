@@ -8,3 +8,6 @@ sb.o : sb.c
 
 clean : 
 	rm sb.o
+
+install : sb
+	cp sb ~/.bin/sb
