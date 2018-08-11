@@ -1,9 +1,11 @@
 #define debug
 #define brightfile "/sys/class/backlight/intel_backlight/brightness"
 #define maxfile "/sys/class/backlight/intel_backlight/max_brightness"
+#define VERSION "v1.0"
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 	//check brightness
 int getBrightness(void){
@@ -62,10 +64,16 @@ int main(int argc, char *argv[]){
 	
 	FILE *fp = NULL;
 	float argVal = 0;
-	
+	char line[10];
+
 	//check arg
 	if (argv[1] != NULL){
 		sscanf(argv[1], "%f", &argVal);
+		sscanf(argv[1], "%s", line);
+		if (strncmp(line, "-V", 2) == 0){
+			printf("Version: %s\n", VERSION);
+			return 0;
+		}
 		if (argVal > 100) {
 			printf("ERROR: cannot excede 100 percent\n");
 			return 0;}
