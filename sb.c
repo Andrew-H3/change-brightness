@@ -3,6 +3,7 @@
 #define maxfile "/sys/class/backlight/intel_backlight/max_brightness"
 #define VERSION "v1.0"
 
+//Included Libraries
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -51,20 +52,20 @@ int setBrightness(int val){
 	fp = fopen( brightfile, "w");
 	if (fp != NULL){
 #ifdef debug
-		printf("setting brightness to %d\n", val);
+		printf("setting brightness to %d\n", val); //Unessary printline 
 #endif
 		fprintf(fp, "%d", val);
 		fclose(fp);
 		return val;
 	}
-	else {printf("error: could not access file\n"); return -1;}
+	else {printf("error: could not access file\n"); return -1;} //Sligthtly more nessary print line
 }
 
 int main(int argc, char *argv[]){
-	
+	//Set file to NULL
 	FILE *fp = NULL;
 	float argVal = 0;
-	char line[10];
+	char line[10]; //Should have used array list
 
 	//check arg
 	if (argv[1] != NULL){
